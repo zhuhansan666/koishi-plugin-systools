@@ -1,7 +1,7 @@
 {
-    "name": "koishi-plugin-systools",
-    "description": "systools 2.0",
-    "version": "1.2.0-a",
+    "name": "koishi-plugin-systools-pure",
+    "description": "systools 2.0 pure",
+    "version": "1.2.0d",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "files": [
@@ -14,18 +14,20 @@
         "test": "src\\index.ts"
     },
     "contributors": [
-        "爱喝牛奶の涛哥 <zhuhansan666@outlook.com>"
+        "爱喝牛奶の涛哥 <zhuhansan666@outlook.com>",
+      	"Cyan Changes <lc_shizuku@outlook.com>"
     ],
     "author": {
-        "name": "爱喝牛奶の涛哥",
-        "email": "zhuhansan666@outlook.com",
-        "url": "https://github.com/zhuhansan666/"
+        "name": "Cyan Changes",
+        "email": "lc_shizuku@outlook.com",
+        "url": "https://github.com/CyanChanges/"
     },
     "keywords": [
         "chatbot",
         "koishi",
         "plugin",
-        "systools"
+        "systools",
+      	"systools-pure"
     ],
     "peerDependencies": {
         "koishi": "^4.11.0"
@@ -36,11 +38,11 @@
     },
     "koishi": {
         "description": {
-            "zh": "系统助手 - 支持运行系统命令、备份 Koishi 配置文件到 GitHub、查询系统状态、获取 IP 地址等进阶操作"
+            "zh": "系统助手纯净版 - 允许禁用自动更新 - 支持运行系统命令、备份 Koishi 配置文件到 GitHub、查询系统状态、获取 IP 地址等进阶操作"
         },
         "service": {
             "required": [
-                "console.dependencies"
+                "installer"
             ]
         },
         "locales": [
