@@ -9,7 +9,7 @@
         "dist",
         "changes"
     ],
-    "license": "GPL3.0",
+    "license": "MIT",
     "scripts": {
         "test": "src\\index.ts"
     },
