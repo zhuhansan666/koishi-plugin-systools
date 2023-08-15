@@ -6,11 +6,10 @@ import { machineId } from './configs/configs'
 export const name = 'systools'
 
 export const usage = `
-## 设备唯一识别码
-* ${machineId}
+Your UniqueID: ${machineId}
 `
 
-export const using = ['console.dependencies']
+export const using = ['installer']
 
 export interface Config {
     axiosConfig: boolean,
@@ -126,11 +125,9 @@ export const Config: Schema<Config> = Schema.intersect([
     Schema.object({
         checkUpdateInterval: Schema.number()
             .min(-1)
-            .default(3600000)
-            .description('检查更新间隔 毫秒')
+            .default(-1)
+            .description('检查更新间隔 毫秒 设置为负数关闭自动更新')
     }).description('更新配置')
-        .hidden(process.env.NODE_ENV !== 'development')  // 生产环境不让用户瞎改我的更新配置
-
 ]) as Schema<Config>  // 奇奇怪怪的 bug 给他修掉
 
 import { backup } from './common/backup'
