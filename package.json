@@ -1,21 +1,57 @@
 {
-  "name": "koishi-plugin-systools",
-  "description": "",
-  "version": "0.0.1",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "files": [
-    "lib",
-    "dist"
-  ],
-  "license": "MIT",
-  "scripts": {},
-  "keywords": [
-    "chatbot",
-    "koishi",
-    "plugin"
-  ],
-  "peerDependencies": {
-    "koishi": "^4.14.1"
-  }
+    "name": "koishi-plugin-systools",
+    "description": "systools 2.0",
+    "version": "1.2.1-a",
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts",
+    "files": [
+        "lib",
+        "dist",
+        "changes"
+    ],
+    "license": "MIT",
+    "scripts": {
+        "test": "src\\index.ts"
+    },
+    "contributors": [
+        "爱喝牛奶の涛哥 <zhuhansan666@outlook.com>"
+    ],
+    "author": {
+        "name": "爱喝牛奶の涛哥",
+        "email": "zhuhansan666@outlook.com",
+        "url": "https://github.com/zhuhansan666/"
+    },
+    "keywords": [
+        "chatbot",
+        "koishi",
+        "plugin",
+        "systools"
+    ],
+    "peerDependencies": {
+        "koishi": "^4.11.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zhuhansan666/koishi-plugin-systools.git"
+    },
+    "koishi": {
+        "description": {
+            "zh": "系统助手 - 支持运行系统命令、备份 Koishi 配置文件到 GitHub、查询系统状态、获取 IP 地址等进阶操作"
+        },
+        "service": {
+            "required": [
+                "console.dependencies"
+            ]
+        },
+        "locales": [
+            "zh"
+        ]
+    },
+    "devDependencies": {
+        "@koishijs/client": "^5.11.0"
+    },
+    "dependencies": {
+        "node-machine-id": "^1.1.12",
+        "semver": "latest"
+    }
 }
