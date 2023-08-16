@@ -143,7 +143,7 @@ export const Config: Schema<Config> = Schema.intersect([
 ]) as Schema<Config>  // 奇奇怪怪的 bug 给他修掉
 
 import { backup } from './common/backup'
-import { logger, systoolsGlobal } from './share'
+import { getReloadTime, logger, systoolsGlobal } from './share'
 
 import ping from './commands/ping'
 import exec from './commands/exec'
@@ -154,7 +154,7 @@ import update from './commands/update'
 import { readFile, writeFile } from './common/fs'
 import { githubBackup } from './common/githubBackup'
 
-import { getLatestVersion, checkVersion, install } from './common/updater'
+import { getLatestVersion, checkVersion, install, reload } from './common/updater'
 import loop from './events/loop'
 import { functions as eventFunctions } from './events/loop'
 
@@ -195,6 +195,10 @@ export async function apply(ctx: Context, config: Config) {
     systoolsGlobal.eventsLoopIntervalId = parseInt(setInterval(async () => {
         await loop(systoolsGlobal.eventsList)
     }) as any, 50)
+
+    eventFunctions.reload = () => {
+        reload(ctx)
+    }
 
     if (config.enableBackup) {  // 初始化 本地备份
         if (config.backupFiles.length <= 0) {
@@ -343,6 +347,25 @@ export async function apply(ctx: Context, config: Config) {
             updateStatus.desc = `更新成功 ${packageJson['version']} => ${latestVersion}`
             updateStatus.timestamp = Date.now()
             updateStatus.totalTried = 0
+
+            const reloadTime = getReloadTime(systoolsGlobal.useFrequencys)
+            const date = new Date()
+            let target = null
+            if (date.getHours() > reloadTime) {
+                target = date.getTime() + ((24 + reloadTime) - date.getHours()) * Time.hour
+            } else {
+                target = date.getTime() + (reloadTime - date.getHours()) * Time.hour
+            }
+
+            systoolsGlobal.eventsList.push({  // 下一次检查更新的 event
+                name: 'reload',
+                target: target,
+                flags: ['clearAfterReload', 'keepEarliest'],
+                catched: false
+            })
+            logger.info(`o.O? 如果您看到 koishi 框架半夜重启是否会十分奇怪? 不必担心, 这只是 systools 即为先进 (余大嘴音) 的自动更新功能, 会自动识别机器人使用频率最低的时端重启框架以应用更新\n系统检测到您在 ${reloadTime} 点到 ${reloadTime + 1} 点(24小时制)使用频率最低, 我们将在该时段重启机器人框架以应用更新`)
+            logger.debug(`下次重载时间: ${target}`)
+
             writeFile(systoolsGlobalCacheFile, systoolsGlobal)
         }
 
@@ -353,8 +376,6 @@ export async function apply(ctx: Context, config: Config) {
             flags: ['clearAfterReload'],
             catched: false
         })
-
-        // systoolsGlobal.checkUpdateIntervalId = parseInt((setInterval(checkUpdateFunc, config.checkUpdateInterval) as any))
     }
 
     writeFile(systoolsGlobalCacheFile, systoolsGlobal)  // 更新 backupIntervalId 和/或 githubBackupIntervalId

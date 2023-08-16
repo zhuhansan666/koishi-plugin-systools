@@ -31,32 +31,32 @@ export type systoolsGlobal = {
     eventsLoopIntervalId: number,
     eventsList: Array<Events>,
     updateStatus: UpdateStatus,
-    useFrequencys: {
-        0: useFrequencys  // 00:00 to 00:59:59
-        1: useFrequencys  // 01:00 to 01:59:59
-        2: useFrequencys  // ...
-        3: useFrequencys
-        4: useFrequencys
-        5: useFrequencys
-        6: useFrequencys
-        7: useFrequencys
-        8: useFrequencys
-        9: useFrequencys
-        10: useFrequencys
-        11: useFrequencys
-        12: useFrequencys
-        13: useFrequencys
-        14: useFrequencys
-        15: useFrequencys
-        16: useFrequencys
-        17: useFrequencys
-        18: useFrequencys
-        19: useFrequencys
-        20: useFrequencys
-        21: useFrequencys
-        22: useFrequencys  // ...
-        23: useFrequencys  // 23:00 to 23:59:59
-    },
+    useFrequencys: [
+        useFrequencys,  // 00:00 to 00:59:59
+        useFrequencys,  // 01:00 to 01:59:59
+        useFrequencys,  // ...
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,
+        useFrequencys,  // ...
+        useFrequencys,  // 23:00 to 23:59:59
+    ],
     packageJson: object,
 }
 

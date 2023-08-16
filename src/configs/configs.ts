@@ -25,32 +25,32 @@ export const defaultGlobal: systoolsGlobal = {
         timestamp: null,
         totalTried: 0
     },
-    useFrequencys: {
-        0: Object.assign({}, defaultFrequency),  // 00:00, to 00:59:59
-        1: Object.assign({}, defaultFrequency),  // 01:00, to 01:59:59
-        2: Object.assign({}, defaultFrequency),  // ...
-        3: Object.assign({}, defaultFrequency),
-        4: Object.assign({}, defaultFrequency),
-        5: Object.assign({}, defaultFrequency),
-        6: Object.assign({}, defaultFrequency),
-        7: Object.assign({}, defaultFrequency),
-        8: Object.assign({}, defaultFrequency),
-        9: Object.assign({}, defaultFrequency),
-        10: Object.assign({}, defaultFrequency),
-        11: Object.assign({}, defaultFrequency),
-        12: Object.assign({}, defaultFrequency),
-        13: Object.assign({}, defaultFrequency),
-        14: Object.assign({}, defaultFrequency),
-        15: Object.assign({}, defaultFrequency),
-        16: Object.assign({}, defaultFrequency),
-        17: Object.assign({}, defaultFrequency),
-        18: Object.assign({}, defaultFrequency),
-        19: Object.assign({}, defaultFrequency),
-        20: Object.assign({}, defaultFrequency),
-        21: Object.assign({}, defaultFrequency),
-        22: Object.assign({}, defaultFrequency),  // ...
-        23: Object.assign({}, defaultFrequency),  // 23:00 to 23:59:59
-    },
+    useFrequencys: [
+        Object.assign([], defaultFrequency),  // 00:00, to 00:59:59
+        Object.assign([], defaultFrequency),  // 01:00, to 01:59:59
+        Object.assign([], defaultFrequency),  // ...
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),
+        Object.assign([], defaultFrequency),  // ...
+        Object.assign([], defaultFrequency),  // 23:00 to 23:59:59
+    ],
     packageJson: {},
 }
 

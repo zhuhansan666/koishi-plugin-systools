@@ -1,4 +1,4 @@
-import { Context, Session, Time } from "koishi";
+import { Context, Session, Time, h } from "koishi";
 
 import { systoolsGlobal } from "../share";
 import { getLatestVersion, checkVersion, install } from '../common/updater'
@@ -30,5 +30,11 @@ export default async function update(ctx: Context, session: Session) {
         return `安装失败, ${msg ? `${msg}` : '具体内容详见日志'}`
     }
 
-    return `安装成功`
+    systoolsGlobal.eventsList.push({
+        name: 'reload',
+        target: Date.now() + 3 * Time.second,  // 延时 3s 重载
+        flags: ['clearAfterReload', 'keepEarliest'],
+        catched: false
+    })
+    return `安装成功, koishi 将在 ${h('i18n:time', { value: 3 * Time.second })} 后重启`
 }
