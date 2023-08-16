@@ -4,6 +4,7 @@ import { gt } from "semver"
 
 import { get } from "./network";
 import { functionStatusPromise } from "../types/types";
+import { logger } from "../share";
 
 export async function getLatestVersion(ctx: Context, pluginFullName: string): functionStatusPromise {
     /**
@@ -72,4 +73,5 @@ export async function install(ctx: Context, deps: Dict<string>): functionStatusP
 
 export async function reload(ctx: Context) {
     // TODO: 完成 reload 重载
+    logger.info(`还没有实现重载喵~ 劳烦您自己去重载 koishi 吧~ 敬请谅解捏~`)
 }
