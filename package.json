@@ -1,7 +1,7 @@
 {
     "name": "koishi-plugin-systools",
     "description": "systools 2.0",
-    "version": "1.2.2-a",
+    "version": "1.2.5-a",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "files": [
@@ -11,7 +11,7 @@
     ],
     "license": "MIT",
     "scripts": {
-        "test": "src\\index.ts"
+        "test": "lib/index.js"
     },
     "contributors": [
         "爱喝牛奶の涛哥 <zhuhansan666@outlook.com>"

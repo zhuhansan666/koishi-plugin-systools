@@ -196,8 +196,8 @@ export async function apply(ctx: Context, config: Config) {
         await loop(systoolsGlobal.eventsList)
     }) as any, 50)
 
-    eventFunctions.reload = () => {
-        reload(ctx)
+    eventFunctions.reload = async() => {
+        await reload(ctx)
     }
 
     if (config.enableBackup) {  // 初始化 本地备份
@@ -404,7 +404,7 @@ export async function apply(ctx: Context, config: Config) {
         writeFile(systoolsGlobalCacheFile, systoolsGlobal)
     })
 
-    ctx.command('systools/plugin/update', '检查更新')
+    ctx.command('systools/update', '检查更新')
         .action(async ({ session }) => {
             return await update(ctx, (session as Session))
         })
