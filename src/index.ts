@@ -196,7 +196,7 @@ export async function apply(ctx: Context, config: Config) {
         await loop(systoolsGlobal.eventsList)
     }) as any, 50)
 
-    eventFunctions.reload = async() => {
+    eventFunctions.reload = async () => {
         await reload(ctx)
     }
 
@@ -404,16 +404,27 @@ export async function apply(ctx: Context, config: Config) {
         writeFile(systoolsGlobalCacheFile, systoolsGlobal)
     })
 
-    ctx.command('systools/systools-version', '获取当前插件版本 (基于读取 package.json)')
-        .action(async ({ session }) => {
-            return `版本: ${systoolsGlobal.packageJson['version'] ?? '0.0.0'}`
-        })
+    const commands = ['systools', 'systools/system', 'systools/process', 'systools/debug',]
+
+    for (let i = 0; i < commands.length; i++) {
+        const command = commands[i]
+        ctx.command(command, '当前可用的指令有:')
+            .action(async ({ session }) => {
+                const cmds = command.split('/')
+                session.execute(`help ${cmds[cmds.length-1]}`)
+            })
+    }
 
     ctx.command('systools/update', '检查更新')
         .action(async ({ session }) => {
             return await update(ctx, (session as Session))
         })
-    
+
+    ctx.command('systools/systools-version', '获取当前插件版本 (基于读取 package.json)')
+        .action(async ({ session }) => {
+            return `版本: ${systoolsGlobal.packageJson['version'] ?? '0.0.0'}`
+        })
+
     ctx.command('systools/system/ip', '获取 koishi 所在设备 IP')
         .action(async ({ session }) => {
             session.content = 'ping'

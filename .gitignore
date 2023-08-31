@@ -16,4 +16,6 @@ tsconfig.tsbuildinfo
 *.njsproj
 *.sln
 
+errorslog/
+
 push.bat
