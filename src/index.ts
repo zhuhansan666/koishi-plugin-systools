@@ -404,9 +404,20 @@ export async function apply(ctx: Context, config: Config) {
         writeFile(systoolsGlobalCacheFile, systoolsGlobal)
     })
 
+    ctx.command('systools/systools-version', '获取当前插件版本 (基于读取 package.json)')
+        .action(async ({ session }) => {
+            return `版本: ${systoolsGlobal.packageJson['version'] ?? '0.0.0'}`
+        })
+
     ctx.command('systools/update', '检查更新')
         .action(async ({ session }) => {
             return await update(ctx, (session as Session))
+        })
+    
+    ctx.command('systools/system/ip', '获取 koishi 所在设备 IP')
+        .action(async ({ session }) => {
+            session.content = 'ping'
+            return await session.execute('ping')
         })
 
     ctx.command('systools/system/ping [ip:text]', '使用 API ping 指定网站\n> 当不指定 IP 时, 获取 koishi 所在设备 IP')
@@ -419,7 +430,7 @@ export async function apply(ctx: Context, config: Config) {
             return await sysinfo(ctx, (session as Session))
         })
 
-    ctx.command('systools/process/taskrun <command:text>', '使用 exec 运行系统命令\n> 注意: 运行的所有指令将直接应用于您的系统, 固最低权限为 3, 请您按需更改指令权限.\n> 同时, 该指令为实验性指令, 可能发送诸如 命令输出混乱 / 刷屏 / 杀死进程无效 等状况, 所造成的任何后果均需用户自行承担.', { authority: 3 })
+    ctx.command('systools/process/taskrun <command:text>', '使用 exec 运行系统命令\n> 注意: 运行的所有指令将直接应用于您的系统, 固最低权限为 3, 请您按需更改指令权限.\n> 同时, 该指令为实验性指令, 可能发生诸如 命令输出混乱 / 刷屏 / 杀死进程无效 等状况, 所造成的任何后果均需用户自行承担.', { authority: 3 })
         .action(async ({ session }) => {
             return await exec(ctx, (session as Session))
         })

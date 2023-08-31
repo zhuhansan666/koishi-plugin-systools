@@ -33,14 +33,14 @@ export default async function ping(ctx: Context, session: Session, ip: string) {
 
         return `请求返回
 IP: ${data.query}
-IP 属地: ${data.continent} ${data.country} ${data.regionName} ${data.city} ${data.district}
-运营商: ${data.isp}
-组织名称: ${data.org}
-公司归属: ${data.as}
-DNS 查询信息: ${data.reverse}
-(是/否)移动设备(使用数据连接): ${data.mobile}
-(是/否)代理服务器/虚拟专用网络服务器/洋葱路由出口地址: ${data.proxy}
-(是/否)数据中心/网络托管商 IP: ${data.hosting}`
+IP 属地: ${data.continent} ${data.country} ${data.regionName} ${data.city} ${data.district}\
+${data.isp ? `\n运营商: ${data.isp}` : ''}\
+${data.org ? `\n组织名称: ${data.org}` : ''}\
+${data.as ? `\n公司归属: ${data.as}` : ''}\
+${data.reverse ? `\nDNS 查询信息: ${data.reverse}` : ''}\
+${data.mobile ? '\n该 IP 使用移动数据连接' : ''}\
+${data.proxy ? '\n该 IP 是代理服务器/虚拟专用网络服务器/洋葱路由出口地址' : ''}\
+${data.hosting ? '\n该 IP 是数据中心/网络托管商' : ''}`
 
     } catch (error) {
         return `请求失败\n${error.stack}`
