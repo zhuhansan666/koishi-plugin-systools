@@ -125,8 +125,9 @@ export const Config: Schema<Config> = Schema.intersect([
     Schema.object({
         checkUpdateInterval: Schema.number()
             .min(-1)
+            .max(-1)
             .default(-1)
-            .description('检查更新间隔 毫秒 设置为负数关闭自动更新')
+            .description('检查更新间隔 毫秒 设置为负数 以关闭自动更新')
     }).description('更新配置')
 ]) as Schema<Config>  // 奇奇怪怪的 bug 给他修掉
 
