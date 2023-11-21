@@ -1,3 +1,6 @@
+# 1.2.9
+1. fix: 没有将 icons 文件夹上传至 npm 
+
 # 1.2.8
 1. add: 在 usage 中: 安装 systools-lts 提示
 
