@@ -4,7 +4,7 @@ export function toString(data: object | string): string {
     }
 
     try {
-        return JSON.stringify(data)
+        return JSON.stringify(data, null, 4)
     } catch(error) {
         console.log(error)
         return null

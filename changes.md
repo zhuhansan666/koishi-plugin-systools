@@ -1,3 +1,6 @@
+# 1.2.8
+1. add: 在 usage 中: 安装 systools-lts 提示
+
 # 1.2.7-a
 1. fix: systools 等根指令权限等级不正确
 

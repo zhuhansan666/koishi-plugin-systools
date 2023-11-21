@@ -1,16 +1,25 @@
-import { Context, Schema, Session, Time, remove } from 'koishi'
+import { Context, Schema, Session, Time, version as KoishiVersion } from 'koishi'
 import path from 'path'
 
 import { machineId, getUseFrequency } from './configs/configs'
+import { systoolsLts, systoolsLtsUrl, systoolsLtsIconBase64 } from './share'
 
 export const name = 'systools'
 
+export const using = ['installer', 'console.dependencies']
 export const usage = `
 ## 设备唯一识别码
 * ${machineId}
-`
 
-export const using = ['console.dependencies']
+<div style="display: grid; align-items: center; grid-template-columns: 1fr 200fr 20fr; column-gap: 32px; margin-top: 64px; margin-bottom: 32px;">
+<img src="data:image/png;base64, ${systoolsLtsIconBase64}" alt="${systoolsLts}-icon"></img>
+<h2><a target="_blank" href="${systoolsLtsUrl}">${systoolsLts}</a> 在与 ${name} 相同的技术上运行, 并移除了自动更新*</h2>
+</div>
+<a class="el-button" target="_blank" href="${systoolsLtsUrl}">安装 ${systoolsLts} (需要在安装后&nbsp;<b>手动卸载</b>&nbsp;${name})</a>
+<a class="el-button" target="_blank" href="/dependencies">依赖管理 (以卸载 ${name})</a>
+
+> *systools-lts 移除了自动更新, 但仍可通过 \`update\` 指令手动更新, 且有新版本时会在日志中提示
+`
 
 export interface Config {
     axiosConfig: boolean,
@@ -160,7 +169,7 @@ import { functions as eventFunctions } from './events/loop'
 
 
 export async function apply(ctx: Context, config: Config) {
-    const systoolsGlobalCacheFile = path.resolve(ctx.baseDir, 'cache/systools/systoolGlobal.json')
+    const systoolsGlobalCacheFile = path.resolve(ctx.baseDir, `cache/${name}/systoolGlobal.json`)
     systoolsGlobal.systoolsGlobalCacheFile = systoolsGlobalCacheFile
 
     const { status, data, msg } = await readFile(systoolsGlobalCacheFile)
@@ -422,7 +431,7 @@ export async function apply(ctx: Context, config: Config) {
 
     ctx.command('systools/systools-version', '获取当前插件版本 (基于读取 package.json)')
         .action(async ({ session }) => {
-            return `版本: ${systoolsGlobal.packageJson['version'] ?? '0.0.0'}`
+            return `${name} 当前版本: ${systoolsGlobal.packageJson['version'] ?? '0.0.0'}`
         })
 
     ctx.command('systools/system/ip', '获取 koishi 所在设备 IP')
@@ -480,20 +489,25 @@ export async function apply(ctx: Context, config: Config) {
     if (process.env.NODE_ENV === 'development') {
         const debug = require('./debug/functions')
 
-        ctx.command('systools/debug/suse')  // 突然想写这个
+        ctx.command('systools.debug.use')  // 突然想写这个
             // o.O? 您看到 koishi 框架半夜重启是否十分奇怪? 不必担心, 这只是 systools 即为先进 (余大嘴音) 的自动更新功能, 会自动识别机器人使用频率最低的时端重启框架以应用更新\n系统检测到您在 ${key} 点到 ${key+1} 点(24小时制)使用频率最低, 我们将在该时段重启机器人框架以应用更新
             .action(() => {
                 return debug.Object2String(systoolsGlobal.useFrequencys)
             })
 
-        ctx.command('systools/debug/supdate')
+        ctx.command('systools.debug.update')
             .action(() => {
                 return debug.Object2String(systoolsGlobal.updateStatus)
             })
 
-        ctx.command('systools/debug/events')
+        ctx.command('systools.debug.events')
             .action(() => {
                 return debug.Object2String(systoolsGlobal.eventsList)
+            })
+
+        ctx.command('systools.debug.koishiversion')
+            .action(() => {
+                return `${KoishiVersion}`
             })
     }
 }

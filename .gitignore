@@ -17,5 +17,6 @@ tsconfig.tsbuildinfo
 *.sln
 
 errorslog/
+icons-building/
 
 push.bat

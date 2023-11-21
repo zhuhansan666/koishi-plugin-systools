@@ -1,4 +1,6 @@
 import { Logger } from "koishi"
+import path from 'path'
+import { readFileSync } from "fs"
 
 import { useFrequencys } from "./types/types"
 import { defaultGlobal } from "./configs/configs"
@@ -8,6 +10,10 @@ export const logger = new Logger('systools')
 
 export const systoolsGlobal = Object.assign({}, defaultGlobal)
 export const execProcesses: Array<execProcess> = []
+
+export const systoolsLts = 'systools-lts'
+export const systoolsLtsUrl = '/market?keyword=systools-lts'
+export const systoolsLtsIconBase64 = Buffer.from(readFileSync(path.resolve(__dirname, `../icons/${systoolsLts}.png`))).toString('base64')
 
 export function getReloadTime(useFrequencys: Array<useFrequencys>, defaultTime: number=3): number {
     let nulls = 0
