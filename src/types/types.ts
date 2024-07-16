@@ -22,7 +22,7 @@ export type useFrequencys = {
     receivedMessages: number,
     sendMessages: number,
     result?: number  // 这个就是判断的标准, 通过上面命令调用次数 收到的信息个数 发送的信息个数综合计算的
-    // result 越小代表该时段约不常用
+    // result 越小代表该时段越不常用
     // 计算公式: (commands * 50 + receivedMessages * 20 + sendMessages * 30) / 100
 }
 

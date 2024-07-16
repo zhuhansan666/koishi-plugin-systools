@@ -1,4 +1,5 @@
 import { Context, Schema, Session, Time, version as KoishiVersion } from 'koishi'
+import {} from '@koishijs/plugin-http'
 import path from 'path'
 
 import { machineId, getUseFrequency } from './configs/configs'
@@ -6,7 +7,7 @@ import { systoolsLts, systoolsLtsUrl, systoolsLtsIconBase64 } from './share'
 
 export const name = 'systools'
 
-export const using = ['installer', 'console.dependencies']
+export const using = ['installer', 'http']
 export const usage = `
 ## 设备唯一识别码
 * ${machineId}
