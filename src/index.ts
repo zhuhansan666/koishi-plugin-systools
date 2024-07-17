@@ -19,7 +19,7 @@ export const usage = `
 <a class="el-button" target="_blank" href="${systoolsLtsUrl}">安装 ${systoolsLts} (需要在安装后&nbsp;<b>手动卸载</b>&nbsp;${name})</a>
 <a class="el-button" target="_blank" href="/dependencies">依赖管理 (以卸载 ${name})</a>
 
-> *systools-lts 移除了自动更新, 但仍可通过 \`update\` 指令手动更新, 且有新版本时会在日志中提示
+> *用户可以通过 *update-service* 插件的 *管理自动更新 - update-service* 页面 (须开启 *update-service* 插件的 *enablePermissionSystem* 选项) 禁用或启用 *systools-lts* 的自动更新. 且可通过 \`update\` 指令手动更新, 有新版本时会在 *systools-lts* 的日志中提示.
 `
 
 export interface Config {
@@ -303,7 +303,7 @@ export async function apply(ctx: Context, config: Config) {
 
             const { status, data: latestVersion, msg } = await getLatestVersion(ctx, packageJson['name'])
             if (status) {
-                logger.warn(`检查更新错误: ${msg}, 退出更新操作`)
+                logger.warn(`检查更新错误: ${msg}, 退出更新操作${msg instanceof Error ? `\n${msg.stack}` : ''}`)
                 updateStatus.code = -1
                 updateStatus.msg = 'updateError'
                 updateStatus.desc = `检查更新错误: ${msg}`

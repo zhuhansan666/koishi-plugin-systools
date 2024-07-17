@@ -31,7 +31,7 @@ function post(ctx: Context, url: string, token?: string, data?: object, options?
 
 function get(ctx: Context, url: string, token?: string, data?: object, options?: object) {
     const config: Config = ctx.config
-    return ctx.http.axios(
+    return ctx.http(
         url,
         {
             params: data,
