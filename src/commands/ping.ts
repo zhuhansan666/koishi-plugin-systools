@@ -34,7 +34,7 @@ export default async function ping(ctx: Context, session: Session, ip: string) {
 
         return `请求返回
 IP: ${data.query}
-IP 属地: ${data.continent} ${data.country} ${data.regionName} ${data.city} ${data.district}\
+IP 属地: ${data.continent} ${data.countryCode == 'TW' && data.country.length == 4 ? '中国台湾' : data.country} ${data.regionName} ${data.city} ${data.district}\
 ${data.isp ? `\n运营商: ${data.isp}` : ''}\
 ${data.org ? `\n组织名称: ${data.org}` : ''}\
 ${data.as ? `\n公司归属: ${data.as}` : ''}\
